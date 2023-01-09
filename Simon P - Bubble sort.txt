@@ -1,0 +1,17 @@
+function bubblesort1(arr){
+    let arrlength = arr.length;
+    let temp, stop, i, j;
+    
+    for (i=0; i < arrlength; i++){
+        stop=arrlength-i;
+        for (j=0; j < stop; j++){
+            if (arr[j] > arr[j+1]){
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+    
+    return arr;
+}
