@@ -1,0 +1,24 @@
+<?php 
+
+function money($a){
+    $arr = array(1000, 500, 200, 100, 50, 20, 10, 5, 2, 1);
+    $i = 0;
+    $ark = array();
+    while($a > 0){
+        if($a >= $arr[$i]){
+            $a = $a - $arr[$i];
+            array_push($ark, $arr[$i]);
+            echo $a ."<br>";
+        }
+        else {
+            $i++;
+        }
+    }
+    print_r ($ark);
+        }
+
+echo money(2785);
+
+
+
+?>
