@@ -1,0 +1,19 @@
+<?php
+
+$arr = [12,58,14,6,2, [14,5,[1,2,3]]];
+
+function recursive_print($arr){
+foreach ($arr as $prom)
+{
+    if (gettype($prom) == 'array')
+    {
+        echo recursive_print($prom);
+    }
+    else
+    {
+        echo $prom . " ";
+    }
+}
+}
+
+?>
