@@ -1,0 +1,91 @@
+<form method="post">
+        <input type='number' id="first" name="first"><br>
+        <input type='number' id="second" name="second"><br>
+        <input name="form" type="submit" value="Submit">
+    </form>
+
+        <input onclick="selectFirst(1)" id="square" type="button" value="Čtverec" style="display: block; margin-bottom: 5px; border: 1px solid grey;">
+        <input onclick="selectFirst(2)" id="rectangle" type="button" value="Obdélník" style="display: block; margin-bottom: 5px; border: 1px solid grey;">
+        <input onclick="selectFirst(3)" id="triangle" type="button" value="Trojúhleník" style="display: block; margin-bottom: 5px; border: 1px solid grey;">
+        <input onclick="selectSecond(1)" id="allSame" type="button" value="Rovnostraný" style="display: none; margin-bottom: 5px; margin-left:20px; border: 1px solid grey;">
+        <input onclick="selectSecond(2)" id="twoSame" type="button" value="Rovnoramenný" style="display: none; margin-bottom: 5px; margin-left:20px; border: 1px solid grey;">
+        <br>
+        <div id="divA" style="display: none; "><label for="input1">Strana <strong>a</strong> </label> <input id="input1" type="number"><br></div>                
+        <div id="divB" style="display: none"><label for="input2">Strana <strong>b</strong> </label> <input id="input2" type="number"><br></div>        
+        <br>
+        <div id="divO" style="display: none"><input type="button" onclick="count(1)" value="Odeslat data na obvod" style="border: 1px solid grey;"></div>
+        <div id="divS" style="display: none"><input type="button" onclick="count(2)" value="Odeslat data na obsah" style="border: 1px solid grey;"></div>
+        <br>
+        <a id="result"></a>
+    <script>
+        function count(option){
+            let a = parseInt(document.getElementById("input1").value);
+            let b = parseInt(document.getElementById("input2").value);
+            switch(option){
+                case 1:
+                    switch(selectFirstVar){
+                        case 1:
+                            showResult(a*4, 1);
+                            break;
+                        case 2:
+                            showResult((a*2)+(b*2), 1);
+                            break;
+                        case 3:
+                            switch(selectSecondVar){
+                                case 1:
+                                    showResult(a*3, 1);
+                                    break;
+                                case 2:
+                                    if(a > b){
+                                        showResult((2*a)+b, 1);
+                                    } else {
+                                        showResult((2*b)+a, 1);
+                                    }
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch(selectFirstVar){
+                        case 1:
+                            showResult(a*a, 2);
+                            break;
+                        case 2:
+                            showResult(a*b, 2);
+                            break;
+                        case 3:
+                            switch(selectSecondVar){
+                                case 1:
+                                    showResult(((a*a)*Math.sqrt(3))/4, 2);
+                                    break;
+                                case 2:
+                                   if(a > b){
+                                        let alpha = Math.cos(b/(2*a));
+                                        console.log(alpha);
+                                        showResult(((a*a)*Math.sin(2*alpha))/2, 2);
+                                    } else {
+                                        let alpha = Math.cos(a/(2*b));
+                                        showResult(((b*b)*Math.sin(2*alpha))/2, 2);
+                                    }
+                                    showResult("Chybí vzorec", 2);
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+            }
+        }
+        
+        function showResult(result, type){
+            switch(type){
+                case 1:
+                    document.getElementById("result").innerHTML = "Obvod je: <strong>"+result+"</strong> jednotek.";
+                    break;
+                case 2:
+                    document.getElementById("result").innerHTML = "Obsah je: <strong>"+result+"</strong> jednotek².";
+                    break;
+            }
+        }
+    </script>
+    </body>
