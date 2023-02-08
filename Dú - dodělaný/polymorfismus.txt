@@ -1,0 +1,45 @@
+<?php
+
+class Auto{
+        private $znacka;
+        private $typ;
+
+        
+public function __construct($znacka, $typ){
+        $this->znacka = $znacka;
+        $this->typ = $typ;
+}
+
+public function vratitinfo(){
+        return "znacka:".$this->znacka()." typ:".$this->typ()."";
+}        
+}
+
+class Nakladak extends Auto{
+        private $nosnost;
+
+        
+public function __construct($znacka, $typ){
+        parent::__construct($znacka, $typ);
+        $this->nosnost = $nosnost;
+    }
+    
+public function vratitinfo(){
+        return "znacka:".$this->znacka()." typ:".$this->typ()." nosnost:".$this->nosnost()."";
+}     
+}
+
+class Elektrickeauto extends Auto{
+        private $dojezdvkm;
+
+public function __construct($znacka, $typ){
+        parent::__construct($znacka, $typ);
+        $this->dojezdvkm = $dojezdvkm;
+    }
+    
+public function vratitinfo(){
+        return "znacka:".$this->znacka()." typ:".$this->typ()." dojezd v km:".$this->dojezdvkm()."";
+}     
+}
+
+?>
