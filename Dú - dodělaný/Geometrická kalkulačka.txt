@@ -4,20 +4,59 @@
         <input name="form" type="submit" value="Submit">
     </form>
 
-        <input onclick="selectFirst(1)" id="square" type="button" value="Čtverec" style="display: block; margin-bottom: 5px; border: 1px solid grey;">
-        <input onclick="selectFirst(2)" id="rectangle" type="button" value="Obdélník" style="display: block; margin-bottom: 5px; border: 1px solid grey;">
-        <input onclick="selectFirst(3)" id="triangle" type="button" value="Trojúhleník" style="display: block; margin-bottom: 5px; border: 1px solid grey;">
-        <input onclick="selectSecond(1)" id="allSame" type="button" value="Rovnostraný" style="display: none; margin-bottom: 5px; margin-left:20px; border: 1px solid grey;">
-        <input onclick="selectSecond(2)" id="twoSame" type="button" value="Rovnoramenný" style="display: none; margin-bottom: 5px; margin-left:20px; border: 1px solid grey;">
+        <input onclick="selectFirst(1)" id="square" type="button" value="Čtverec">
+        <input onclick="selectFirst(2)" id="rectangle" type="button" value="Obdélník">
+        <input onclick="selectFirst(3)" id="triangle" type="button" value="Trojúhleník">
+        <input onclick="selectSecond(1)" id="allSame" type="button" value="Rovnostraný">
+        <input onclick="selectSecond(2)" id="twoSame" type="button" value="Rovnoramenný">
         <br>
-        <div id="divA" style="display: none; "><label for="input1">Strana <strong>a</strong> </label> <input id="input1" type="number"><br></div>                
-        <div id="divB" style="display: none"><label for="input2">Strana <strong>b</strong> </label> <input id="input2" type="number"><br></div>        
+        <div id="divA"><label for="input1">Strana <strong>a</strong> </label> <input id="input1" type="number"><br></div>                
+        <div id="divB"><label for="input2">Strana <strong>b</strong> </label> <input id="input2" type="number"><br></div>        
         <br>
-        <div id="divO" style="display: none"><input type="button" onclick="count(1)" value="Odeslat data na obvod" style="border: 1px solid grey;"></div>
-        <div id="divS" style="display: none"><input type="button" onclick="count(2)" value="Odeslat data na obsah" style="border: 1px solid grey;"></div>
+        <div id="divO"><input type="button" onclick="count(1)" value="Odeslat data na obvod"></div>
+        <div id="divS"><input type="button" onclick="count(2)" value="Odeslat data na obsah"></div>
         <br>
         <a id="result"></a>
     <script>
+        var selectFirstVar = 0;
+        var selectSecondVar = 0;
+        
+        function selectFirst(option){
+            switch(option){
+                case 1:
+                    selectFirstVar = 1;
+                    hideResults();
+                    break;
+                case 2:
+                    selectFirstVar = 2;
+                    hideResults();
+                    break;
+                case 3:
+                    selectFirstVar = 3;
+                    hideResults();
+                    break;
+            }
+        }
+        
+        function selectSecond(option){
+            switch(option){
+                case 1:
+                    selectSecondVar = 1;
+                    hideResults();
+                    break;
+                case 2:
+                    selectSecondVar = 2;
+                    hideResults();
+                    break;
+            }
+        }
+        
+        function hideResults(){
+            document.getElementById("result").innerHTML = "";
+            document.getElementById("input1").value = "";
+            document.getElementById("input2").value = "";
+        }
+        
         function count(option){
             let a = parseInt(document.getElementById("input1").value);
             let b = parseInt(document.getElementById("input2").value);
@@ -89,3 +128,4 @@
         }
     </script>
     </body>
+
