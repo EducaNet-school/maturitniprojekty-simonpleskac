@@ -1,0 +1,135 @@
+<?php 
+
+ 
+class pacient{
+    public $name;
+    private $age;
+    private $reason;
+
+public function __construct($name, $age, $reason){
+    $this->name = $name;
+    $this->age = $age;
+    $this->reason = $reason;
+}
+public function why() {
+    return $this->reason;
+}
+public function who(){
+    return $this->name;
+}
+public function how(){
+    return $this->age;
+}
+
+
+public function medicalTest($secondOne){
+    if($this->reason === "očkování"){
+        if($secondOne->reason !== "očkování"){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+    else {
+        return 0;
+        
+    }
+}
+
+public function agecheck($secondOne){
+    if($this->age <= 5){
+        if($this->age >= $secondOne->age){
+            return 0;
+        }
+        else{
+            return 1;
+        }
+    }
+    else {
+        return 0;
+        
+    }
+}
+
+
+ public function administration($secondOne){
+    
+if($this->medicalTest($secondOne)  === 1){
+    return 1;
+}
+if($this->agecheck($secondOne)  === 1){
+    if($secondOne->how() <= 5 ){
+        return 0;
+    }
+    else{
+        return 1;
+    } 
+}
+else{
+    return 0;
+}
+}
+
+}
+
+class Cekarna{
+    private $fronta = [];
+
+
+
+public function PrichodDoCekarny($someoneNew){
+    array_push($this->fronta, $someoneNew);
+}
+
+
+public function waitime(){
+    $x = 0;
+    $z = count($this->fronta);
+    while($x < $z){
+    echo $x . $this->fronta[$x]->who().'<br>';
+    $x++;
+    }
+}
+public function PrichodDoAmbulance() {
+        for($i=0;$i<count($this->fronta);$i++){
+		$val = $this->fronta[$i];
+		$j = $i-1;
+                if($j >= -1 ){
+                    $j = 0; 
+                }
+                $leak = $this->fronta[$j];
+                echo $this->fronta[$j]->who();
+		while($j>=0 && $val->administration($leak)){
+			[$val, $leak] = [$leak, $val];
+                        $j--;    
+
+		}
+		}
+        [$val, $leak] = [$leak, $val];
+        
+}
+   
+
+
+}
+
+
+$ales = new pacient("Aleš", 5, "očkování");
+$marek = new pacient("Marek", 50, "chřipka");
+$hana = new pacient("Hana", 21, "angína");
+$dan = new pacient("Dan", 2, "migréna");
+$ema = new pacient("Ema", 18, "očkování");
+$ed = new pacient("Ed", 9, "průjem");
+
+$yes = new Cekarna();
+$yes->PrichodDoCekarny($ales);
+$yes->PrichodDoCekarny($marek);
+$yes->PrichodDoCekarny($hana);
+$yes->PrichodDoCekarny($dan);
+$yes->PrichodDoCekarny($ema);
+$yes->PrichodDoCekarny($ed);
+
+echo $yes->waitime();
+echo $dan->medicalTest($ales);
+echo $yes->PrichodDoAmbulance();
