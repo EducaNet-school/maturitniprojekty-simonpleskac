@@ -1,0 +1,57 @@
+create table film(
+id int(11) auto_increment not null,
+nazev varchar(55),
+popis varchar(999),
+delka int(11),
+datum_vydani date(YYYY-MM-DD),
+primary key (id)
+);
+
+create table kategorie(
+id int(11) auto_increment not null,
+nazev varchar(55),
+primary key (id)
+);
+
+create table herec(
+id int(11) auto_increment not null,
+jmeno varchar(55),
+prijmeni varchar(55),
+primary key (id)
+);
+
+create table oceneni(
+id int(11) auto_increment not null,
+nazev varchar(55),
+popis varchar(999),
+datum date(YYYY-MM-DD),
+misto varchar(70),
+primary key (id)
+);
+
+create table a1(
+id int(11) auto_increment not null,
+filmid int(11),
+kategorieid int(11),
+primary key (id),
+foreign key (filmid) references film(filmID),
+foreign key (kategorieid) references kategorie(kategorieID)
+);
+
+create table b2(
+id int(11) auto_increment not null,
+filmid int(11),
+herecid int(11),
+primary key (id),
+foreign key (filmid) references film(filmID),
+foreign key (herecid) references herec(herecID)
+);
+
+create table c3(
+id int(11) auto_increment not null,
+filmid int(11),
+oceneniid int(11),
+primary key (id),
+foreign key (filmid) references film(filmID),
+foreign key (oceneniid) references oceneni(oceneniID)
+);
