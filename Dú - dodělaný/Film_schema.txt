@@ -55,3 +55,36 @@ primary key (id),
 foreign key (filmid) references film(filmID),
 foreign key (oceneniid) references oceneni(oceneniID)
 );
+
+DELIMITER $$
+
+CREATE FUNCTION nejdelsiFilm(varKategorie varchar(50))
+RETURNS int
+BEGIN
+   declare cas int;
+   declare idKategorie int;
+   select id into idKategorie from kategorie where nazev = varKategorie;
+   select delka into cas from film where kategorie = idKategorie order by delka desc;
+   return cas;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE PromazKategorie()
+BEGIN
+    declare aktualniPocet int default 1;
+    declare pocetKategorii int;
+    declare pocetFilmu int default 0;
+    select count(id) into pocetKategorii from kategorie;
+    while aktualniPocet < pocetKategorii do
+       select count(id) into pocetFilmu from film where kategorie = aktualniPocet;
+       if pocetFilmu = 0 THEN 
+          delete from kategorie where id = aktualniPocet; 
+       end if;
+       set aktualniPocet=aktualniPocet+1;
+    end while;
+END $$
+
+DELIMITER ;
